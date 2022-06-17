@@ -1,5 +1,7 @@
 package com.xyha.manager.student_manager.controller;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.xyha.manager.student_manager.entity.User;
 import com.xyha.manager.student_manager.service.IUserService;
 import com.xyha.manager.student_manager.vo.CommonResult;
 import com.xyha.manager.student_manager.vo.LoginVO;
@@ -20,11 +22,11 @@ public class UserController {
 //
 //    }
 //
-//    //修改手机号
-//    @PatchMapping("/{userId}/tel")
-//    public int updateUserTel(@PathVariable("userId") String userId, @RequestParam("tel") String tel){
-//        return Integer.parseInt(userId);
-//    }
+    //修改手机号
+    @PatchMapping("/tel")
+    public boolean updateUserTel(@RequestParam("userId") String userId, @RequestParam("tel") String tel){
+        return userService.update(new UpdateWrapper<User>().eq("id",userId).set("telephone",tel));
+    }
 //
 //    //修改密码
 //    @PatchMapping("/{userId}/password")
@@ -35,7 +37,7 @@ public class UserController {
 //    //增加用户
 //    @PostMapping("/user")
 //    public int insertUser(@RequestBody UserVO userVO){
-//        //TODO 用sql返回的受影响行数row作为返回值
+//
 //    }
 //
 //    //批量增加用户
